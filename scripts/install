@@ -118,19 +118,16 @@ sudo install -o root -g root -m 0644 ../conf/ynh-vpnclient.service /etc/systemd/
 # Set default inits
 # The boot order of these services are important, so they are disabled by default
 # and the ynh-vpnclient service handles them.
-sudo systemctl disable openvpn
-sudo systemctl stop openvpn
+sudo service openvpn stop
 
-sudo systemctl enable php5-fpm
-sudo systemctl restart php5-fpm
+sudo service php5-fpm restart
 
-sudo systemctl reload nginx
+sudo service nginx reload
 
-sudo systemctl enable ynh-vpnclient
 sudo yunohost service add ynh-vpnclient
 
 if ! $upgrade; then
-  sudo systemctl start ynh-vpnclient
+  sudo service ynh-vpnclient start
 
   # Check configuration consistency
   
